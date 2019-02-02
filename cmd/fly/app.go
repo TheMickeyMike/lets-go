@@ -13,8 +13,8 @@ type App struct {
 
 // Initialize setup app
 func (app *App) Initialize() {
-	fmt.Printf("%-13s: %s\n", "App name", appName)
-	fmt.Printf("%-13s: %s\n", "App version", appVersion)
+	fmt.Printf("%-13s: %s\n", "App name", version)
+	fmt.Printf("%-13s: %s\n", "App version", name)
 
 	app.planet = planets.NewMoon("Moon 🌕")
 }

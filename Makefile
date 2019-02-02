@@ -1,15 +1,20 @@
 GIT_VERSION := $(shell git describe --abbrev=4 --dirty --always --tags)
-GOPATH := $(shell go env GOPATH)
+LDFLAGS :=-ldflags "-X main.version=$(GIT_VERSION)"
+GO_TEST :=env GOTRACEBACK=all GO111MODULE=on go test -v $(LDFLAGS)
+GO_BUILD :=env GO111MODULE=on go build $(LDFLAGS)
 
-export GO111MODULE=on
+.PHONY: all
 
+all: clean integration-test build
 
-build: clean
-	go build \
-		-ldflags "-X main.appVersion=$(GIT_VERSION)" \
-		-o ./build/app cmd/fly/*
+test:
+	$(GO_TEST) ./...
+
+integration-test:
+	$(GO_TEST) -tags integration ./...
+
+build:
+	$(GO_BUILD) -o ./build/app cmd/fly/*
 
 clean:
-	rm -rf ./build
-
-.PHONY: clean
+	@rm -rf build

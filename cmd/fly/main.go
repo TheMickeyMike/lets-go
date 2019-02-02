@@ -1,7 +1,7 @@
 package main
 
-var appVersion = "undefined"
-var appName = "Fly To The Moon"
+var version = "undefined"
+var name = "Fly To The Moon"
 
 func main() {
 	app := App{}
